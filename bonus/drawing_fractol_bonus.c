@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawing_fractol.c                                  :+:      :+:    :+:   */
+/*   drawing_fractol_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 02:52:53 by motelti           #+#    #+#             */
-/*   Updated: 2025/03/08 01:38:27 by motelti          ###   ########.fr       */
+/*   Updated: 2025/03/08 01:20:47 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fractol.h"
+#include "../fractol_bonus.h"
 
 int	get_color(int iter, t_fractol *f)
 {
@@ -18,6 +18,7 @@ int	get_color(int iter, t_fractol *f)
         return (0);
 
     double t = (double)iter / f->max_iter;
+    t += f->color_shift; // <-- Shift the color phase
 
     int r = (int)(sin(5 * t + 0) * 127 + 128);
     int g = (int)(sin(5 * t + 2) * 127 + 128);
@@ -28,25 +29,16 @@ int	get_color(int iter, t_fractol *f)
 
 void	zoom(int x, int y, t_fractol *f)
 {
-    double world_x = x / f->zoom + f->x_set;
-    double world_y = y / f->zoom + f->y_set;
-    
-    // Apply zoom
-    f->zoom *= 1.5;
-    
-    f->x_set = world_x - (x / f->zoom);
-    f->y_set = world_y - (y / f->zoom);
+	f->x_set = (x / f->zoom + f->x_set) - (x / (f->zoom * 1.5));
+	f->y_set = (y / f->zoom + f->y_set) - (y / (f->zoom * 1.5));
+	f->zoom *= 1.5;
 }
 
 void	unzoom(int x, int y, t_fractol *f)
 {
-    double world_x = x / f->zoom + f->x_set;
-    double world_y = y / f->zoom + f->y_set;
-    
-    f->zoom /= 1.5;
-    
-    f->x_set = world_x - (x / f->zoom);
-    f->y_set = world_y - (y / f->zoom);
+	f->x_set = (x / f->zoom + f->x_set) - (x / (f->zoom / 1.5));
+	f->y_set = (y / f->zoom + f->y_set) - (y / (f->zoom / 1.5));
+	f->zoom /= 1.5;
 }
 
 void	pixel_draw(t_fractol *f, int color)

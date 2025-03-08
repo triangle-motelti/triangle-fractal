@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 15:43:41 by motelti           #+#    #+#             */
-/*   Updated: 2025/03/07 18:00:08 by motelti          ###   ########.fr       */
+/*   Created: 2025/03/06 15:24:06 by motelti           #+#    #+#             */
+/*   Updated: 2025/03/07 23:18:40 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fractol.h"
+#include "../fractol_bonus.h"
 
-void	mandel(t_fractol *f)
+void	julia(t_fractol *f)
 {
-	f->type = 0;
+	f->type = 1;
 	f->max_iter = 100;
 	f->zoom = 300;
-	f->x_set = -2.1;
-	f->y_set = -1.3;
+	f->x_set = -1.5;
+	f->y_set = -1.4;
+	f->c_r = -0.5;
+	f->c_i = 0.5;
 }
 
-static void	draw_mandel(t_fractol *f)
+static void	draw_julia(t_fractol *f)
 {
 	double	z_next;
-	double	z_tmp;
+	double	z_rtmp;
 	int		i;
 
-	f->c_r = f->x / f->zoom + f->x_set;
-	f->c_i = -(f->y / f->zoom + f->y_set);
-	f->z_r = 0.0;
-	f->z_i = 0.0;
+	f->z_r = (f->x / f->zoom + f->x_set);
+	f->z_i = (f->y / f->zoom + f->y_set);
+	z_next = f->z_r * f->z_r + f->z_i * f->z_i;
 	i = 0;
-	z_next = 0.0;
 	while (z_next < 4 && i < f->max_iter)
 	{
-		z_tmp = f->z_r;
-		f->z_r = f->z_r * f->z_r - f->z_i * f->z_i + f->c_r;
-		f->z_i = 2 * f->z_i * z_tmp - f->c_i;
+		z_rtmp = f->z_r * f->z_r - f->z_i * f->z_i;
+		f->z_i = 2 * f->z_r * f->z_i + f->c_i;
+		f->z_r = z_rtmp + f->c_r;
 		z_next = f->z_r * f->z_r + f->z_i * f->z_i;
 		i++;
 	}
@@ -47,7 +47,7 @@ static void	draw_mandel(t_fractol *f)
 		pixel_draw(f, get_color(i, f));
 }
 
-void	print_mandel(t_fractol *f)
+void	print_julia(t_fractol *f)
 {
 	f->img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
 	f->addr = mlx_get_data_addr(f->img, &f->bpp, &f->line_len, &f->endian);
@@ -57,7 +57,7 @@ void	print_mandel(t_fractol *f)
 		f->y = 0;
 		while (f->y < HEIGHT)
 		{
-			draw_mandel(f);
+			draw_julia(f);
 			f->y++;
 		}
 		f->x++;

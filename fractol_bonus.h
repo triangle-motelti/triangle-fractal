@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   fractol_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 00:19:19 by motelti           #+#    #+#             */
-/*   Updated: 2025/03/08 00:01:25 by motelti          ###   ########.fr       */
+/*   Updated: 2025/03/08 01:22:11 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define KEY_UAR	65362
 # define KEY_DAR	65364
 
+# define KEY_S		115
+
 typedef struct s_fractol {
 	void	*mlx;
 	void	*win;
@@ -46,7 +48,9 @@ typedef struct s_fractol {
 	double	z_i;
 	double	x_set;
 	double	y_set;
+	double  color_shift;
 }				t_fractol;
+
 
 int		clear(t_fractol *f);
 void	print_fracal(t_fractol *f);

@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:24:06 by motelti           #+#    #+#             */
-/*   Updated: 2025/03/06 15:42:55 by motelti          ###   ########.fr       */
+/*   Updated: 2025/03/07 23:12:50 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	julia(t_fractol *f)
 	f->c_i = 0.5;
 }
 
-void	preset_julia(t_fractol *f, double rl, double imgn)
-{
-	julia(f);
-	f->c_r = rl;
-	f->c_i = imgn;
-}
+// void	preset_julia(t_fractol *f, double rl, double imgn)
+// {
+// 	julia(f);
+// 	f->c_r = rl;
+// 	f->c_i = imgn;
+// }
 
 static void	draw_julia(t_fractol *f)
 {
@@ -51,7 +51,7 @@ static void	draw_julia(t_fractol *f)
 	if (i == f->max_iter)
 		pixel_draw(f, 0);
 	else
-		pixel_draw(f, f->color & ~f->mask * i);
+		pixel_draw(f, get_color(i, f));
 }
 
 void	print_julia(t_fractol *f)

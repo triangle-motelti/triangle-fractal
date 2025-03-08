@@ -6,91 +6,67 @@
 #    By: motelti <motelti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/06 15:45:43 by motelti           #+#    #+#              #
-#    Updated: 2025/03/07 01:43:43 by motelti          ###   ########.fr        #
+#    Updated: 2025/03/08 00:39:52 by motelti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-# NAME = fractol
-# CC = cc -Wall -Wextra -Werror
+NAME = fractol
+BONUS = fractol_bonus
+CC = cc
+CFLAGS	= -Wall -Werror -Wextra
 
-# MLX =   minilibx-linux/libmlx.a
-# SRC = 	fractal/main.c \
-# 	  	fractal/mandelbrot.c \
-# 		fractal/julia.c \
-# 		fractal/fractal.c \
-# 		fractal/drawing_fractol.c \
-# 		fractal/fractol_key.c \
-# 		fractal/ft_putstr_fd.c \
-# 		fractal/ft_calloc.c \
-# 		fractal/ft_atof.c \
-# 		fractal/ft_strcmp.c
+HEADER = fractol.h
+HEADER_BONUS = fractol_bonus.h
 
-# OBJ = $(SRC:.c=.o)
-# INC = fractol.h
+MLX = minilibx-linux/libmlx.a
+SRC = fractal/main.c \
+	fractal/mandelbrot.c \
+	fractal/julia.c \
+	fractal/fractal.c \
+	fractal/drawing_fractol.c \
+	fractal/fractol_key.c \
+	fractal/ft_putstr_fd.c \
+	fractal/ft_calloc.c \
+	fractal/ft_atof.c \
+	fractal/ft_strcmp.c
+	  
+BONUS_SRC = bonus/main_bonus.c \
+	bonus/mandelbrot_bonus.c \
+	bonus/julia_bonus.c \
+	bonus/fractal_bonus.c \
+	bonus/drawing_fractol_bonus.c \
+	bonus/fractol_key_bonus.c \
+	bonus/ft_putstr_fd_bonus.c \
+	bonus/ft_calloc_bonus.c \
+	bonus/ft_atof_bonus.c \
+	bonus/ft_strcmp_bonus.c
 
-# all: $(NAME)
+OBJ = $(SRC:.c=.o)
+BONUS_OBJ = $(BONUS_SRC:.c=.o)
 
-# $(NAME): $(OBJ) $(MLX)
-# 	$(CC) $(OBJ) $(MLX) -lm -lXext -lX11 -o $(NAME)
+all: $(NAME) clean
+bonus: $(BONUS) clean
 
-# $(MLX):
-# 	make -C MLX
+$(NAME): $(OBJ) $(MLX) 
+	$(CC) $(CFLAGS) $(OBJ) $(MLX) -Imlx_linux -lm -lXext -lX11 -lz -o $(NAME)
 
-# %.o: %.c $(INC)
-# 	$(CC) -c $< -o $@
-
-# bonus: all
-
-# clean:
-# 	make clean -C MLX
-# 	rm -f $(OBJ)
-
-# fclean: clean
-# 	rm -f $(NAME)
-
-# re: fclean all
-
-
-NAME	= fractol
-CC		= cc -Wall -Wextra -Werror
-MLX_DIR	= minilibx-linux
-MLX		= $(MLX_DIR)/libmlx.a
-
-SRC		= fractal/main.c \
-		  fractal/mandelbrot.c \
-		  fractal/julia.c \
-		  fractal/fractal.c \
-		  fractal/drawing_fractol.c \
-		  fractal/fractol_key.c \
-		  fractal/ft_putstr_fd.c \
-		  fractal/ft_calloc.c \
-		  fractal/ft_atof.c \
-		  fractal/ft_strcmp.c
-
-OBJ		= $(SRC:.c=.o)
-INC		= fractol.h
-
-all: $(MLX) $(NAME)
-
-$(NAME): $(OBJ)
-	$(CC) $^ $(MLX) -lXext -lX11 -lm -o $@
+$(BONUS): $(BONUS_OBJ) $(MLX)
+	$(CC) $(CFLAGS) $(BONUS_OBJ) $(MLX) -Imlx_linux -lm -lXext -lX11 -lz -o $(BONUS)
 
 $(MLX):
-	@make -s -C $(MLX_DIR)
+	make -C minilibx-linux
 
-%.o: %.c $(INC)
-	$(CC) -I$(MLX_DIR) -c $< -o $@
-
-bonus: all
+%.o: %.c $(HEADER) $(HEADER_BONUS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@make -s -C $(MLX_DIR) clean
-	@rm -f $(OBJ)
+	make clean -C minilibx-linux
+	rm -f $(OBJ) $(BONUS_OBJ)
 
 fclean: clean
-	@rm -f $(NAME)
+	rm -f $(NAME) $(BONUS)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+
