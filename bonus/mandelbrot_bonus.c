@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:43:41 by motelti           #+#    #+#             */
-/*   Updated: 2025/03/07 21:30:00 by motelti          ###   ########.fr       */
+/*   Updated: 2025/03/17 01:34:27 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static void	draw_mandel(t_fractol *f)
 
 void	print_mandel(t_fractol *f)
 {
-	f->img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
-	f->addr = mlx_get_data_addr(f->img, &f->bpp, &f->line_len, &f->endian);
 	f->x = 0;
 	while (f->x < WIDTH)
 	{
@@ -63,5 +61,4 @@ void	print_mandel(t_fractol *f)
 		f->x++;
 	}
 	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
-	mlx_destroy_image(f->mlx, f->img);
 }

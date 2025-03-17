@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 02:52:53 by motelti           #+#    #+#             */
-/*   Updated: 2025/03/08 01:38:27 by motelti          ###   ########.fr       */
+/*   Updated: 2025/03/16 22:06:27 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,32 @@
 
 int	get_color(int iter, t_fractol *f)
 {
-    if (iter == f->max_iter)
-        return (0);
+	double	t;
+	int		r;
+	int		g;
+	int		b;
 
-    double t = (double)iter / f->max_iter;
-
-    int r = (int)(sin(5 * t + 0) * 127 + 128);
-    int g = (int)(sin(5 * t + 2) * 127 + 128);
-    int b = (int)(sin(5 * t + 4) * 127 + 128);
-
-    return ((r << 16) | (g << 8) | b);
+	if (iter == f->max_iter)
+		return (0);
+	t = (double)iter / f->max_iter;
+	r = (int)(sin(5 * t + 0) * 127 + 128);
+	g = (int)(sin(5 * t + 2) * 127 + 128);
+	b = (int)(sin(5 * t + 4) * 127 + 128);
+	return ((r << 16) | (g << 8) | b);
 }
 
 void	zoom(int x, int y, t_fractol *f)
 {
-    double world_x = x / f->zoom + f->x_set;
-    double world_y = y / f->zoom + f->y_set;
-    
-    // Apply zoom
-    f->zoom *= 1.5;
-    
-    f->x_set = world_x - (x / f->zoom);
-    f->y_set = world_y - (y / f->zoom);
+	f->x_set = (x / f->zoom + f->x_set) - (x / (f->zoom * 1.5));
+	f->y_set = (y / f->zoom + f->y_set) - (y / (f->zoom * 1.5));
+	f->zoom *= 1.5;
 }
 
 void	unzoom(int x, int y, t_fractol *f)
 {
-    double world_x = x / f->zoom + f->x_set;
-    double world_y = y / f->zoom + f->y_set;
-    
-    f->zoom /= 1.5;
-    
-    f->x_set = world_x - (x / f->zoom);
-    f->y_set = world_y - (y / f->zoom);
+	f->x_set = (x / f->zoom + f->x_set) - (x / (f->zoom / 1.5));
+	f->y_set = (y / f->zoom + f->y_set) - (y / (f->zoom / 1.5));
+	f->zoom /= 1.5;
 }
 
 void	pixel_draw(t_fractol *f, int color)

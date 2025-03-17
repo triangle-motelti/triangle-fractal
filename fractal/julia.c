@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:24:06 by motelti           #+#    #+#             */
-/*   Updated: 2025/03/07 23:12:50 by motelti          ###   ########.fr       */
+/*   Updated: 2025/03/17 01:28:57 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,7 @@ void	julia(t_fractol *f)
 	f->zoom = 300;
 	f->x_set = -1.5;
 	f->y_set = -1.4;
-	f->c_r = -0.5;
-	f->c_i = 0.5;
 }
-
-// void	preset_julia(t_fractol *f, double rl, double imgn)
-// {
-// 	julia(f);
-// 	f->c_r = rl;
-// 	f->c_i = imgn;
-// }
 
 static void	draw_julia(t_fractol *f)
 {
@@ -56,8 +47,6 @@ static void	draw_julia(t_fractol *f)
 
 void	print_julia(t_fractol *f)
 {
-	f->img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
-	f->addr = mlx_get_data_addr(f->img, &f->bpp, &f->line_len, &f->endian);
 	f->x = 0;
 	while (f->x < WIDTH)
 	{
@@ -70,5 +59,4 @@ void	print_julia(t_fractol *f)
 		f->x++;
 	}
 	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
-	mlx_destroy_image(f->mlx, f->img);
 }

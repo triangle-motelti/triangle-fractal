@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   burn_ship.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 15:43:41 by motelti           #+#    #+#             */
-/*   Updated: 2025/03/17 01:21:49 by motelti          ###   ########.fr       */
+/*   Created: 2025/03/12 21:48:43 by motelti           #+#    #+#             */
+/*   Updated: 2025/03/17 01:31:40 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fractol.h"
+#include "../fractol_bonus.h"
 
-void	mandel(t_fractol *f)
+double	ft_abs(double x)
 {
-	f->type = 0;
+	if (x > 0)
+		return (x);
+	return (-x);
+}
+
+void	burning_ship(t_fractol *f)
+{
+	f->type = 2;
 	f->max_iter = 100;
 	f->zoom = 300;
 	f->x_set = -2.1;
 	f->y_set = -1.5;
 }
 
-static void	draw_mandel(t_fractol *f)
+static void	draw_burning_ship(t_fractol *f)
 {
 	double	z_next;
 	double	z_tmp;
@@ -36,8 +43,8 @@ static void	draw_mandel(t_fractol *f)
 	while (z_next < 4 && i < f->max_iter)
 	{
 		z_tmp = f->z_r;
-		f->z_r = f->z_r * f->z_r - f->z_i * f->z_i + f->c_r;
-		f->z_i = 2 * f->z_i * z_tmp - f->c_i;
+		f->z_r = ft_abs(f->z_r * f->z_r - f->z_i * f->z_i + f->c_r);
+		f->z_i = ft_abs(2 * f->z_i * z_tmp - f->c_i);
 		z_next = f->z_r * f->z_r + f->z_i * f->z_i;
 		i++;
 	}
@@ -47,7 +54,7 @@ static void	draw_mandel(t_fractol *f)
 		pixel_draw(f, get_color(i, f));
 }
 
-void	print_mandel(t_fractol *f)
+void	print_burning_ship(t_fractol *f)
 {
 	f->x = 0;
 	while (f->x < WIDTH)
@@ -55,7 +62,7 @@ void	print_mandel(t_fractol *f)
 		f->y = 0;
 		while (f->y < HEIGHT)
 		{
-			draw_mandel(f);
+			draw_burning_ship(f);
 			f->y++;
 		}
 		f->x++;

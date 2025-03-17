@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 02:52:53 by motelti           #+#    #+#             */
-/*   Updated: 2025/03/08 01:20:47 by motelti          ###   ########.fr       */
+/*   Updated: 2025/03/16 13:30:14 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 
 int	get_color(int iter, t_fractol *f)
 {
-    if (iter == f->max_iter)
-        return (0);
+	double	t;
+	int		r;
+	int		g;
+	int		b;
 
-    double t = (double)iter / f->max_iter;
-    t += f->color_shift; // <-- Shift the color phase
-
-    int r = (int)(sin(5 * t + 0) * 127 + 128);
-    int g = (int)(sin(5 * t + 2) * 127 + 128);
-    int b = (int)(sin(5 * t + 4) * 127 + 128);
-
-    return ((r << 16) | (g << 8) | b);
+	if (iter == f->max_iter)
+		return (0);
+	t = (double)iter / f->max_iter;
+	t += f->color_shift;
+	r = (int)(sin(5 * t + 0) * 127 + 128);
+	g = (int)(sin(5 * t + 2) * 127 + 128);
+	b = (int)(sin(5 * t + 4) * 127 + 128);
+	return ((r << 16) | (g << 8) | b);
 }
 
 void	zoom(int x, int y, t_fractol *f)

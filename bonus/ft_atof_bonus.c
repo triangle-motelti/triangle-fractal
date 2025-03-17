@@ -6,11 +6,25 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 23:27:56 by motelti           #+#    #+#             */
-/*   Updated: 2025/03/07 14:57:30 by motelti          ###   ########.fr       */
+/*   Updated: 2025/03/10 14:50:01 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol_bonus.h"
+
+static int	get_sign(const char *str, int *i)
+{
+	int	sign;
+
+	sign = 1;
+	if (str[*i] == '-' || str[*i] == '+')
+	{
+		if (str[*i] == '-')
+			sign = -1;
+		(*i)++;
+	}
+	return (sign);
+}
 
 double	ft_atof(const char *str)
 {
@@ -21,14 +35,10 @@ double	ft_atof(const char *str)
 
 	result = 0.0;
 	factor = 1.0;
-	sign = 1;
 	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
+	while (str[i] == ' ')
 		i++;
-	}
+	sign = get_sign(str, &i);
 	while (str[i] >= '0' && str[i] <= '9')
 		result = result * 10 + (str[i++] - '0');
 	if (str[i] == '.')
@@ -41,6 +51,5 @@ double	ft_atof(const char *str)
 			i++;
 		}
 	}
-
 	return (sign * result / factor);
 }

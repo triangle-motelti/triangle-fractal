@@ -6,26 +6,22 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 00:19:19 by motelti           #+#    #+#             */
-/*   Updated: 2025/03/08 00:01:25 by motelti          ###   ########.fr       */
+/*   Updated: 2025/03/16 13:28:40 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include "minilibx-linux/mlx.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
+# include <mlx.h>
 
 # define WIDTH 900
 # define HEIGHT 900
 
 # define KEY_ESC	65307
-# define KEY_LAR	65361
-# define KEY_RAR	65363
-# define KEY_UAR	65362
-# define KEY_DAR	65364
 
 typedef struct s_fractol {
 	void	*mlx;
@@ -63,11 +59,12 @@ int		get_color(int iter, t_fractol *f);
 
 void	julia(t_fractol *f);
 void	print_julia(t_fractol *f);
+void	julia_checker(char *s, t_fractol *f);
 
 void	mandel(t_fractol *f);
 void	print_mandel(t_fractol *f);
 
-int 	ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(const char *s1, const char *s2);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_putstr_fd(char *s, int fd);
 double	ft_atof(const char *str);
