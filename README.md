@@ -166,7 +166,12 @@ Below are sample renderings of the fractals:
 
 *A Julia Set with parameters \( c = 0.355 + 0.355i \).*
 
-![Burning Ship](https://via.placeholder.com/300x200.png?text=Burning+Ship)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b9d893bb-51af-470c-8684-9f8176bdbf1d" />
+
+<img width="4000" height="4000" alt="image" src="https://github.com/user-attachments/assets/55f35d3d-a8bb-4511-aa6c-973a46b50d33" />
+
+<img width="7440" height="1376" alt="image" src="https://github.com/user-attachments/assets/da074b46-1620-47e6-825b-cca08cda4b5d" />
+
 *The Burning Ship Fractal, showcasing its unique symmetry.*
 
 *Note: Replace placeholder images with actual fractal renderings in your repository.*
