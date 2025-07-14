@@ -162,8 +162,9 @@ Below are sample renderings of the fractals:
 
 *The Mandelbrot Set with its characteristic bulbous shapes.*
 
-![Julia Set](https://via.placeholder.com/300x200.png?text=Julia+Set)
-*A Julia Set with parameters \( c = 0.285 + 0.01i \).*
+<img width="2500" height="2500" alt="image" src="https://github.com/user-attachments/assets/aaad4640-2618-4b8a-bfde-162b6c9b69e0" />
+
+*A Julia Set with parameters \( c = 0.355 + 0.355i \).*
 
 ![Burning Ship](https://via.placeholder.com/300x200.png?text=Burning+Ship)
 *The Burning Ship Fractal, showcasing its unique symmetry.*
