@@ -194,5 +194,3 @@ Below are sample renderings of the fractals:
 - **MiniLibX**: Install via your package manager (e.g., `apt-get install libx11-dev libxext-dev` on Ubuntu).
 - **Standard C Libraries**: `stdlib.h`, `math.h`, etc.
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
