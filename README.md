@@ -158,7 +158,8 @@ make
 ## Visual Examples
 Below are sample renderings of the fractals:
 
-![Mandelbrot Set](https://via.placeholder.com/300x200.png?text=Mandelbrot+Set)
+<img width="2560" height="1920" alt="image" src="https://github.com/user-attachments/assets/5cebfa40-ccf0-4434-88a3-527d86acc0b5" />
+
 *The Mandelbrot Set with its characteristic bulbous shapes.*
 
 ![Julia Set](https://via.placeholder.com/300x200.png?text=Julia+Set)
